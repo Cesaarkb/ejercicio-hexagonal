@@ -1,8 +1,7 @@
 package com.minsait.ejercicio_hexagonal.domain.productos.port.out;
 
-import com.minsait.ejercicio_hexagonal.application.productos.dto.ProductoCreateCommand;
-import com.minsait.ejercicio_hexagonal.application.productos.dto.ProductoResponse;
+import com.minsait.ejercicio_hexagonal.domain.productos.model.Producto;
 
 public interface SaveProductoPort {
-    ProductoResponse saveProducto(ProductoCreateCommand producto);
+    Producto saveProducto(Producto producto);
 }

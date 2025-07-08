@@ -4,5 +4,5 @@ import com.minsait.ejercicio_hexagonal.application.productos.dto.ProductoCreateC
 import com.minsait.ejercicio_hexagonal.application.productos.dto.ProductoResponse;
 
 public interface CreateProductoUseCase {
-ProductoResponse createProducto(ProductoCreateCommand producto);
+ProductoResponse  createProducto(ProductoCreateCommand producto);
 }
