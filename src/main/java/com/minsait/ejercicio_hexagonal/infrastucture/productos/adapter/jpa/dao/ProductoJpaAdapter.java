@@ -1,11 +1,13 @@
 package com.minsait.ejercicio_hexagonal.infrastucture.productos.adapter.jpa.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import com.minsait.ejercicio_hexagonal.domain.productos.model.Producto;
 import com.minsait.ejercicio_hexagonal.domain.productos.port.out.GetProductoByIdPort;
+import com.minsait.ejercicio_hexagonal.domain.productos.port.out.LoadAllProductosPort;
 import com.minsait.ejercicio_hexagonal.domain.productos.port.out.SaveProductoPort;
 import com.minsait.ejercicio_hexagonal.infrastucture.productos.adapter.entity.ProductoEntity;
 import com.minsait.ejercicio_hexagonal.infrastucture.productos.adapter.jpa.repository.ProductoJpaRepository;
@@ -15,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductoJpaAdapter implements GetProductoByIdPort, SaveProductoPort{
+public class ProductoJpaAdapter implements GetProductoByIdPort, SaveProductoPort, LoadAllProductosPort{
 
     private final ProductoJpaRepository productoJpaRepository;
 
@@ -30,6 +32,13 @@ public class ProductoJpaAdapter implements GetProductoByIdPort, SaveProductoPort
     public Optional<Producto> getProductoById(Long id) {
         return productoJpaRepository.findById(id)
         .map(ProductoEntityMapper::toDomain);
+    }
+
+    @Override
+    public List<Producto> findAllByIds(List<Long> ids) {
+        List<ProductoEntity> entities = productoJpaRepository.findAllById(ids);
+        List<Producto> entitiesFind = ProductoEntityMapper.toDomainList(entities);
+        return entitiesFind;
     }
 
 }
